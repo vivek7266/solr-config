@@ -9,5 +9,7 @@
             <str name="echoParams">all</str>
         </lst>
     </requestHandler>
+    
+    <schemaFactory class="ClassicIndexSchemaFactory"/>
 
 </config>
