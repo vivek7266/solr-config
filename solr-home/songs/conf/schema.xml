@@ -5,7 +5,7 @@
 
     <fields>
     <field name="id" type="string" indexed="true" stored="true"  multiValued="false" required="true"/> 
-    <field name="title" type="text_general" indexed="true" stored="false" multiValued="true"/>
+    <field name="title" type="text_general" indexed="true" stored="true" multiValued="true"/>
     <field name="title_suggest" type="text_suggest" indexed="true" stored="false" multiValued="true"/>
     <field name="title_ngram" type="text_ngram" indexed="true" stored="false" multiValued="true"/>
     <field name="title_edge" type="text_edge" indexed="true" stored="false" multiValued="true"/>
@@ -64,9 +64,8 @@
     <fieldType name="text_edge" class="solr.TextField">
       <analyzer type="index">
         <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
         <tokenizer class="solr.KeywordTokenizerFactory" />
-        <charFilter class="solr.PatternReplaceFilterFactory" pattern="([\.,;:-_])" replacement=" " />
+        <filter class="solr.LowerCaseFilterFactory"/>
         <charFilter class="solr.PatternReplaceFilterFactory" pattern="/\(([^)]+)\)/;" replacement=" " />
         <filter class="solr.EdgeNGramFilterFactory" maxGramSize="30" minGramSize="3"/>
         <charFilter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replacement="" />
@@ -76,7 +75,6 @@
         <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
-        <charFilter class="solr.PatternReplaceFilterFactory" pattern="([\.,;:-_])" replacement=" " />
         <charFilter class="solr.PatternReplaceFilterFactory" pattern="([^\w\d\*æøåÆØÅ ])" replacement="" />
         <charFilter class="solr.PatternReplaceFilterFactory" pattern="^(.{30})(.*)?" replacement="$1" />
         <charFilter class="solr.PatternReplaceFilterFactory" pattern="\W+" replacement=""/>
